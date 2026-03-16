@@ -31,9 +31,50 @@ The system should provide real time update and response times, to keep users in 
 
 The system must continually be capable of meeting or exceeding user demands through scalable infrastructure and design, to allow changes to resource flow and capacities.
 
+KPIs outlined, explain why
+
+Solution effectiveness, Break down each page's purpose and why you chose to design it that way.
 Data Dictionary + Key: 
 
+
 Entity Relationship Diagrams:
+
+All data here should be annotated in a data dictionary + give it a description
+
+Staff Registration
+  Staff ID (Primary Key)
+  Password
+  Email
+  Phone Number
+  Registry Date
+  Last Login
+  Role
+  
+User Registration
+User ID (Primary Key)
+Password
+Email
+Phone Number
+Registry Date
+Role
+
+Product Information
+Product ID
+Purchase Information
+Order Tracking
+
+Add a Task flow to show how pages would be navigated
+
+Test plan, covering all the features on each page, prerequisites to adding them and dependancies
+Usability testing, 
+A/B testing
+Accessibility testing 
+All forms of User Experience Tests, require defined user testing groups, and one group with very diverse needs.
+
+Page Load Times
+Response Times
+Scalability
+All performance tests, Requires performance testing tools and a deployed website.
 
 Wireframes/Sketches Benefits *elaborate on each point's importance* :
 Early Visualisations
