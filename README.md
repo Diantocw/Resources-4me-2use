@@ -79,44 +79,40 @@ All performance tests, Requires performance testing tools and a deployed website
 Wireframes/Sketches Benefits *elaborate on each point's importance* :
 Early Visualisations
 
-Cost effective Iteration
+Important Legal and Regulatory Requirements:
+WCAG compliance for accessibility
+GDPR for data privacy
+Consumer Rights act 2015
+Copyright, Designs and patents act 1988
+Online Safety bill compliance
+National Cyber Security Centre.
 
-Functionality Focus
+Effectiveness of the solution:
+Explain what each page's purpose is, and how the designs added will contribute to that.
+Explain how your designs contributes to solution effectiveness (Consistency, Simplicity, Responsiveness, Accesspibility)
+Explain how your functionality is effective, (Login/Signup, Purchase Processing, Product Management, Community, Contact & Support
 
-Early User Feedback
+Algorithms for each page
 
-Improved Collaboration 
 
-Reduced Complexity
+Compatibility of the solution with users:
+Who is most likely to use the solution?
+Accessibility users (people who struggle to, or cannot go to grocery stores)
+Families & General Users
+Environmental Advocates and Community Leaders
 
-Foundations for Functional Prototypes & Beyond
+Functional user compatibility (Ai Driven Insights to predict shopper wants or costs compared to competitors. Efficient ordering system customisable user experience, intuitive dashboards.) 
 
-Risk Mitigation
+Accessibility Considerations and tools: 
+WCAG Compliance 
+Color Palette & contrast considerations
+High contrast mode for visually impaired
+Typography & Readability Elements
+Layouts & Navigation
 
-Example of design here vvvv
 
-Functional Prototype benefits *Elaborate here too.*:
 
-Descriptions of Pages and Page content.
 
-Task Flows.
-
-Algorithm Designs/Element Flowcharts
-
-Test Plans.
-User Design Compatibility:
-
-How the solution aligns with users
-
-User Centered Design and compatibility
-
-Functional user compatibility 
-
-Consider the advantages of using the methods you have elected for.
-
-WCAG2.1 Guidelines
-WebAIM Contrast Checker
-Coolors Contrast Checker
 
 Task 1 END
 
