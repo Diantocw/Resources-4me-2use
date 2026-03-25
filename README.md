@@ -119,7 +119,399 @@ Task 1 END
 
 
 Task 2
+Make products table for shop page
 
+CREATE TABLE products (
+     id INT NOT NULL ,
+     name TEXT NOT NULL,
+     price INT NOT NULL,
+     PRIMARY KEY (id)
+);
+
+Cart page: Alter to fit with website schema from template, add bootstrap and navbar functionality etc.
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shopping Cart</title>
+
+</head>
+<style>
+    body {
+        background-color: green;
+    }
+    header, nav, main, footer {
+        background-color: white;
+    } 
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+    th {
+        background-color: #dddddd;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    footer {
+        background-color: green;
+        margin-top: 348px;
+        color: black;
+        max-width: 264px;
+    
+    }
+    
+    
+</style>
+
+<body>
+    <header>
+        <h1><?php session_start();
+$user = $_SESSION['user'];
+echo $user['name']; ?> Shopping Cart</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="shop.html">Home</a>
+            </li>
+            <li>
+                <a href="shop.html">Products</a>
+            </li>
+            <li>
+                <a href=
+"#">Contact Us</a>
+            </li>
+            <li>
+                <a href="cart.php">Cart</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <table>
+                <tr>
+                    <th>Product Name </th>
+                    <th>Quantity </th>
+                    <th>Price </th>
+                    <th>Total </th>
+                </tr>
+                <?php
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $dbname = "shp";
+
+                // Create connection
+                $conn = 
+                    new mysqli($servername, $username, $password, $dbname);
+
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                $total = 0;
+
+                // Loop through items in cart and display in table
+                foreach ($_SESSION['cart'] as $product_id => $quantity) {
+                    $sql = "SELECT * FROM products WHERE id = $product_id";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        $name = $row['name'];
+                        $price = $row['price'];
+                        $item_total = $quantity * $price;
+                        $total += $item_total;
+
+                        echo "<tr>";
+                        echo "<td>$name</td>";
+                        echo "<td>$quantity</td>";
+                        echo "<td>$price $</td>";
+                        echo "<td>$item_total $</td>";
+                        echo "</tr>";
+                    }
+                }
+                // Display total
+                echo "<tr>";
+                echo "<td colspan='3'>Total:</td>";
+                echo "<td>$total $</td>";
+                echo "</tr>";
+                ?>
+            </table>
+            <form action="checkout.php" method="post">
+                <input type="submit" 
+                       value="Checkout" 
+                       class="button" />
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&COPY;2023 GFG Shopping Web Application</p>
+    </footer>
+</body>
+
+</html>
+
+Similar scenario as above.
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Checkout Page</title>
+    <link rel="stylesheet" 
+          type="text/css" 
+          href="checkout.css">
+</head>
+<style>
+    body {
+        background-color: #ffffff;
+        font-family: Arial, sans-serif;
+    }
+    
+    header {
+        background-color: green;
+        color: #ffffff;
+        padding: 20px;
+    }
+    
+    nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    nav li {
+        display: inline-block;
+        margin-right: 20px;
+    }
+    
+    nav a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    
+    nav a:hover {
+        text-decoration: underline;
+    }
+    
+    section {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    h1 {
+        color: green;
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+    
+    h2 {
+        color: green;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #666666;
+    }
+    
+    input[type="text"],
+    input[type="email"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+    
+    input[type="submit"] {
+        background-color: green;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+        background-color: #228B22;
+    }
+    
+    footer {
+        background-color: green;
+        color: #ffffff;
+        padding: 20px;
+        text-align: center;
+    }
+    
+</style>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="shop.php">Home</a>
+                </li>
+                <li>
+                    <a href="shop.php">Shop</a>
+                </li>
+                <li>
+                    <a href="cart.php">Cart</a>
+                </li>
+                <li>
+                    <a href=
+"#">Contact</a>
+                
+                       </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h1>Checkout</h1>
+        <form action="thanks.php" method="post">
+            <h2>Billing Information</h2>
+            <label for="name">Name:</label>
+            <input type="text" 
+                   id="name"
+                   name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" 
+                   id="email" 
+                   name="email" required>
+
+            <label for="address">Address:</label>
+            <input type="text" 
+                   id="address" 
+                   name="address" required>
+
+            <label for="city">City:</label>
+            <input type="text" 
+                   id="city" 
+                   name="city" required>
+
+            <label for="state">State:</label>
+            <input type="text" 
+                   id="state" 
+                   name="state" required>
+
+            <label for="zip">Zip Code:</label>
+            <input type="text" 
+                   id="zip"
+                   name="zip" required>
+
+            <h2>Payment Information</h2>
+            <label for="cardholder">Name on Card:</label>
+            <input type="text" id="cardholder" 
+                   name="cardholder" required>
+
+            <label for="cardnumber">Card Number:</label>
+            <input type="text" 
+                   id="cardnumber" 
+                   name="cardnumber" required 
+                   pattern="\d{4}-?\d{4}-?\d{4}-?\d{4}" required=>
+
+
+            <label for="expmonth">Expiration Month:</label>
+            <input type="text" 
+                   id="expmonth" 
+                   name="expmonth" required>
+
+            <label for="expyear">Expiration Year:</label>
+            <input type="text" 
+                   id="expyear" 
+                   name="expyear" required>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" 
+                   id="cvv"
+                   name="cvv" required>
+
+            <input type="submit" 
+                   value="Place Order">
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 GFG Shopping Web Application</p>
+    </footer>
+</body>
+
+</html>
+
+
+
+page to be placed after purchase.
+
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            color: #008000;
+            font-size: 2.5em;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        p {
+            color: #333;
+            font-size: 1.2em;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        
+    </style>
+</head>
+
+
+<?php
+   // Start the session
+    session_start();
+
+ // Retrieve the customer name from the session variable
+    if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+        $customerName = $user['name'];
+    } else {
+        $customerName = "Valued Customer";
+    }
+
+ // Display the thank you message
+    echo "<h1>Thank You, $customerName!</h1>";
+    echo 
+"<p>Your order has been received and will be delivered soon.</p>";
+    ?>
+</html>
+
+Breakdown the development process you go through implementing these pages and features, do not forget to add in any errors and how you fix them. Be as transparent as possible, if you change something in any way it probably should be added.
+
+Comment, Comment, Comment. Add comments to blocks of code to explain what they do, and any additional information that would help someone who hasn't touched your code.
+
+ABC! ALWAYS! BE! COMMENTING!
 
 
 
